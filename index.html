@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MECH-RECORD</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+        }
+        .title {
+            font-size: 24px;
+            margin: 0;
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .buttons button {
+            background-color: #555;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .buttons button:hover {
+            background-color: #777;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 20px;
+        }
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="title">MECH-RECORD</h1>
+        <div class="buttons">
+            <a href="iniciar.html"><button>Iniciar sesión</button></a>
+            <a href="registrar.html"><button>Registrarse</button></a>
+        </div>
+    </header>
+    <div class="gallery">
+        <img src="taller1.jpeg" alt="Taller 1">
+        <img src="taller2.jpeg" alt="Taller 2">
+        <img src="taller4.jpeg" alt="Taller 4">
+        <img src="taller1.jpeg" alt="Taller 5">
+        <img src="taller6.jpeg" alt="Taller 6">
+    </div>
+</body>
+</html>
