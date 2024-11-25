@@ -2,69 +2,286 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MECH-RECORD</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
+        :root {
+            --body-bg: #1c2833;
+            --form-bg: rgba(33, 47, 61, 0.95);
+            --blanco: #f8f9f9;
+
+            --color-principal: #4f6377;
+            --color-principal-light: #6b8aa1;
+            --color-principal-dark: #2f4053;
+
+            --gris-light: #d5d8dc;
+            --gris: #aeb6bf;
+
+            --thin: 300;
+            --normal: 400;
+            --bold: 600;
+            --br: 4px;
+
+            --fuente-principal: "Ubuntu", helvetica, sans-serif;
+            --fuente-secundaria: "Raleway", arial, sans-serif;
+        }
+
+        * {
             padding: 0;
-        }
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            background-color: #333;
-            color: #fff;
-        }
-        .title {
-            font-size: 24px;
             margin: 0;
+            box-sizing: border-box;
         }
-        .buttons {
+
+        body {
+            font-family: var(--fuente-principal);
+            color: var(--blanco);
+            background-color: rgba(103, 122, 141, 0.95);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--gris-light);
+            transition: 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--blanco);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: var(--form-bg);
+            padding: 40px;
+            border-radius: var(--br);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            text-align: center;
+            font-weight: var(--thin);
+            margin-bottom: 40px;
+        }
+
+        .tabs {
             display: flex;
-            gap: 10px;
+            justify-content: center;
+            margin-bottom: 40px;
         }
-        .buttons button {
-            background-color: #555;
-            color: white;
+
+        .tabs button {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            background: rgba(75, 85, 94, 0.25);
+            color: var(--gris-light);
+            font-size: 20px;
             border: none;
-            padding: 10px 20px;
             cursor: pointer;
+            transition: 0.3s ease;
         }
-        .buttons button:hover {
-            background-color: #777;
+
+        .tabs button:hover {
+            background: var(--color-principal-dark);
+            color: var(--blanco);
         }
+
+        .tabs button.active {
+            background: var(--color-principal);
+            color: var(--blanco);
+        }
+
+        .form-container {
+            display: none;
+        }
+
+        .form-container.active {
+            display: block;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            background: none;
+            border: 1px solid var(--gris-light);
+            border-radius: 5px;
+            color: var(--blanco);
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: var(--color-principal-light);
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: var(--color-principal-dark);
+            border: none;
+            color: var(--blanco);
+            font-size: 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: var(--color-principal-light);
+        }
+
+        /* Estilo adicional para el select */
+        .select-container {
+            position: relative;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            background: var(--form-bg);
+            border: 1px solid var(--gris-light);
+            border-radius: 5px;
+            color: var(--blanco);
+            appearance: none; /* Oculta el estilo por defecto del navegador */
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+
+        select:focus {
+            border-color: var(--color-principal-light);
+            background: var(--color-principal-dark);
+            outline: none;
+        }
+
+        select:hover {
+            background: var(--color-principal-light);
+        }
+
+        /* Flecha personalizada */
+        .select-container::after {
+            content: "▼"; /* Flecha personalizada */
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: var(--gris-light);
+            font-size: 18px;
+        }
+
+        .gallery-container {
+            margin-top: 20px;
+        }
+
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 15px;
-            padding: 20px;
         }
+
         .gallery img {
             width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            height: 120px;
+            object-fit: cover;
+            border-radius: 5px;
+            opacity: 1;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .gallery img:hover {
+            opacity: 0.7;
+            transform: scale(1.05);
+        }
+
+        @media screen and (max-width: 500px) {
+            .tabs button {
+                font-size: 16px;
+                padding: 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1 class="title">MECH-RECORD</h1>
-        <div class="buttons">
-            <a href="iniciar.html"><button>Iniciar sesión</button></a>
-            <a href="registrar.html"><button>Registrarse</button></a>
+    <div class="container">
+        <h1>MECH-RECORD</h1>
+        <div class="tabs">
+            <button id="loginTab" class="active">Iniciar Sesión</button>
+            <button id="registerTab">Registrar</button>
         </div>
-    </header>
-    <div class="gallery">
-        <img src="taller1.jpeg" alt="Taller 1">
-        <img src="taller2.jpeg" alt="Taller 2">
-        <img src="taller4.jpeg" alt="Taller 4">
-        <img src="taller1.jpeg" alt="Taller 5">
-        <img src="taller6.jpeg" alt="Taller 6">
+
+        <div id="loginForm" class="form-container active">
+            <form>
+                <label for="email">Correo Electrónico</label>
+                <input type="email" id="email" placeholder="Ingresa tu correo" required>
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" placeholder="Ingresa tu contraseña" required>
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+        </div>
+
+        <div id="registerForm" class="form-container">
+            <form>
+                <label for="name">Nombre Completo</label>
+                <input type="text" id="name" placeholder="Ingresa tu nombre completo" required>
+                <label for="emailRegister">Correo Electrónico (Gmail)</label>
+                <input type="email" id="emailRegister" placeholder="Ejemplo: usuario@gmail.com" required>
+                <label for="passwordRegister">Contraseña</label>
+                <input type="password" id="passwordRegister" placeholder="Ingresa tu contraseña" required>
+                <label for="passwordConfirm">Verificar Contraseña</label>
+                <input type="password" id="passwordConfirm" placeholder="Repite tu contraseña" required>
+                <label for="role">Selecciona tu Rol</label>
+                <div class="select-container">
+                    <select id="role" required>
+                        <option value="" disabled selected>Elige una opción</option>
+                        <option value="cliente">Cliente</option>
+                        <option value="mecanico">Mecánico</option>
+                    </select>
+                </div>
+                <button type="submit">Registrar</button>
+            </form>
+        </div>
+
+        <div class="gallery-container">
+            <h2 style="text-align: center;">Galería</h2>
+            <div class="gallery">
+                <img src="taller1.jpeg" alt="Taller 1">
+                <img src="taller2.jpeg" alt="Taller 2">
+                <img src="taller4.jpeg" alt="Taller 4">
+                <img src="taller5.jpeg" alt="Taller 5">
+                <img src="taller6.jpeg" alt="Taller 6">
+            </div>
+        </div>
     </div>
+
+    <script>
+        const loginTab = document.getElementById('loginTab');
+        const registerTab = document.getElementById('registerTab');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+
+        loginTab.addEventListener('click', () => {
+            loginTab.classList.add('active');
+            registerTab.classList.remove('active');
+            loginForm.classList.add('active');
+            registerForm.classList.remove('active');
+        });
+
+        registerTab.addEventListener('click', () => {
+            registerTab.classList.add('active');
+            loginTab.classList.remove('active');
+            registerForm.classList.add('active');
+            loginForm.classList.remove('active');
+        });
+    </script>
 </body>
 </html>
